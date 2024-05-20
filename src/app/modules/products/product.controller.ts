@@ -1,7 +1,8 @@
-import e, { Request, Response } from "express";
+import { Request, Response } from "express";
 import productValidationSchema from "./product.validation";
 import { productService } from "./product.service";
 
+//creating products into database
 const createProduct = async (req: Request, res: Response) => {
   try {
     const { product: productData } = req.body;
@@ -25,7 +26,27 @@ const createProduct = async (req: Request, res: Response) => {
     });
   }
 };
+//getting all the products from database
+const getAllProducts = async (req: Request, res: Response) => {
+  try {
+    const result = await productService.getAllProductsFromDB();
+
+    //send response
+    res.status(200).json({
+      success: true,
+      message: "Products fetched successfully!",
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+      error: err,
+    });
+  }
+};
 
 export const productController = {
   createProduct,
+  getAllProducts,
 };
