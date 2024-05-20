@@ -13,12 +13,13 @@ const inventorySchema = new Schema<TInventory>({
 
 const productSchema = new Schema<TProducts>({
   name: { type: String, required: true },
-  description: { type: String },
+  description: { type: String, required: true },
   price: { type: Number, required: true },
-  category: { type: String },
-  tags: { type: [String] },
+  category: { type: String, required: true },
+  tags: { type: [String], required: true },
   variants: {
     type: [variantSchema],
+    required: true,
   },
-  inventory: inventorySchema,
+  inventory: { inventorySchema, required: true },
 });
