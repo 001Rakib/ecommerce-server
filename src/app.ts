@@ -16,4 +16,12 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
+//for not found route
+app.all("*", (req: Request, res: Response) => {
+  res.status(400).json({
+    success: false,
+    message: "Route is not found",
+  });
+});
+
 export default app;
