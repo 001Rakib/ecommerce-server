@@ -5,7 +5,7 @@ import { productService } from "./product.service";
 //creating products into database
 const createProduct = async (req: Request, res: Response) => {
   try {
-    const { product: productData } = req.body;
+    const productData = req.body;
 
     //data validation using Zod
     const zodParsedData = productValidationSchema.parse(productData);
