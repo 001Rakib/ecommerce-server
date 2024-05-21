@@ -38,7 +38,7 @@ const createOrder = async (req: Request, res: Response) => {
           { new: true }
         );
       }
-
+      //update the quantity after making an order
       const updatedQuantityAfterOrder = await Product.findByIdAndUpdate(
         { _id: id },
         {
@@ -46,10 +46,8 @@ const createOrder = async (req: Request, res: Response) => {
         },
         { new: true }
       );
+      //create order into DB
       const result = await orderService.createOrderIntoDB(zodParsedData);
-
-      const remainingQuantity = updatedQuantityAfterOrder?.inventory.quantity;
-      const inStock = updatedQuantityAfterOrder?.inventory.inStock;
 
       //send response
       res.status(200).json({
