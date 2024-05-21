@@ -4,11 +4,11 @@ This is a backend server for an e-commerce application built with Express, Mongo
 
 ### To run the server locally
 
-### \*\* 1. Clone this repository\*\*
+### 1. Clone this repository
 
-### \*\* 2. Navigate to the project directory\*\*
+### 2. Navigate to the project directory
 
-### \*\* 3. Install dependencies\*\*
+### 3. Install dependencies
 
 ```javascript
     npm install
@@ -16,11 +16,11 @@ This is a backend server for an e-commerce application built with Express, Mongo
 
 ### Configuration
 
-### \*\* 1. Environment Variables:\*\*
+### 1. Environment Variables:
 
 - Create a .env file in the project root directory (ignore this file in Git) and define the following environment variables (replace with your actual values)
 
-### \*\* 2. Database Connection:\*\*
+### 2. Database Connection:
 
 - Add Mongoose connection string in the .env file. Ensure it's configured correctly.
 
