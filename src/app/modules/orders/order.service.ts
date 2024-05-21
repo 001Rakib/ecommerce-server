@@ -13,6 +13,13 @@ const createOrderIntoDB = async (orderData: TOrder) => {
   }
 };
 
+//get all the orders from DB
+const getOrdersFromDB = async () => {
+  const result = await Order.find();
+  return result;
+};
+
 export const orderService = {
   createOrderIntoDB,
+  getOrdersFromDB,
 };
