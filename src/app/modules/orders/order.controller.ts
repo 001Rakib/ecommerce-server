@@ -30,7 +30,7 @@ const createOrder = async (req: Request, res: Response) => {
 
       //setting the inStock to false if the available quantity is 0
       if (availableQuantityAfterOrder === 0) {
-        const updateQuantityAfterOrder = await Product.findByIdAndUpdate(
+        await Product.findByIdAndUpdate(
           { _id: id },
           {
             "inventory.inStock": false,
@@ -39,7 +39,7 @@ const createOrder = async (req: Request, res: Response) => {
         );
       }
       //update the quantity after making an order
-      const updatedQuantityAfterOrder = await Product.findByIdAndUpdate(
+      await Product.findByIdAndUpdate(
         { _id: id },
         {
           "inventory.quantity": availableQuantityAfterOrder,
@@ -56,7 +56,7 @@ const createOrder = async (req: Request, res: Response) => {
         data: result,
       });
     }
-  } catch (err: any) {
+  } catch (err: unknown) {
     res.status(500).json({
       success: false,
       message: "Product not Found",
@@ -85,7 +85,7 @@ const getOrder = async (req: Request, res: Response) => {
           data: result,
         });
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       res.status(500).json({
         success: false,
         message: "Order not found",
@@ -101,7 +101,7 @@ const getOrder = async (req: Request, res: Response) => {
         message: "Orders fetched successfully!",
         data: result,
       });
-    } catch (err: any) {
+    } catch (err: unknown) {
       res.status(500).json({
         success: false,
         message: "Order not found",
