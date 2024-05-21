@@ -28,20 +28,46 @@ const createOrder = async (req: Request, res: Response) => {
 
 //get all orders from DB
 const getOrder = async (req: Request, res: Response) => {
-  try {
-    const result = await orderService.getOrdersFromDB();
+  const email = req.query.email as string | undefined;
 
-    //send response
-    res.status(200).json({
-      success: true,
-      message: "Orders fetched successfully!",
-      data: result,
-    });
-  } catch (err: any) {
-    res.status(500).json({
-      success: false,
-      message: "Order not found",
-    });
+  if (email) {
+    try {
+      const result = await orderService.getOrdersFromDB(email);
+      if (!result.length) {
+        res.status(500).json({
+          success: false,
+          message: "Order not found",
+        });
+      } else {
+        //send response
+        res.status(200).json({
+          success: true,
+          message: "Orders fetched successfully for user email!",
+          data: result,
+        });
+      }
+    } catch (err: any) {
+      res.status(500).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
+  } else {
+    try {
+      const result = await orderService.getOrdersFromDB();
+
+      //send response
+      res.status(200).json({
+        success: true,
+        message: "Orders fetched successfully!",
+        data: result,
+      });
+    } catch (err: any) {
+      res.status(500).json({
+        success: false,
+        message: "Order not found",
+      });
+    }
   }
 };
 

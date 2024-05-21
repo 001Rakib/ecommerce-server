@@ -14,9 +14,16 @@ const createOrderIntoDB = async (orderData: TOrder) => {
 };
 
 //get all the orders from DB
-const getOrdersFromDB = async () => {
-  const result = await Order.find();
-  return result;
+const getOrdersFromDB = async (email?: string) => {
+  //for getting order by email
+  if (email) {
+    const regex = new RegExp(email);
+    const result = await Order.find({ email: regex });
+    return result;
+  } else {
+    const result = await Order.find();
+    return result;
+  }
 };
 
 export const orderService = {
